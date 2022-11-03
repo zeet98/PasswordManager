@@ -4,15 +4,10 @@ const mysql = require('mysql');
 const cors = require('cors');
 const PORT = 3001;
 
+const {encrypt, decrypt} = require('./EncryptionHandler');
+
 app.use(cors());
 app.use(express.json());
-
-// const db = mysql.createPool({
-//     user: 'root', 
-//     host: 'localhost',
-//     password: 'password..',
-//     datbase: 'PassMang'
-// });
 
 const db = mysql.createConnection({  //establish connection to db
     user: 'root', 
