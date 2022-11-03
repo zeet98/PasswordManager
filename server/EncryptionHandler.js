@@ -19,4 +19,4 @@ const decrypt = (encryption) => {
     return decryptedPassword.toString();
 };
 
-module.exports = {encrypt, decrypt};
+module.exports = { encrypt, decrypt };
