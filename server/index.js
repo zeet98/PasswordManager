@@ -40,8 +40,11 @@ app.get("/showpasswords", (req, res) => {
        } else {
         res.send(result);
        }
-        res.send(result); 
     });
+});
+
+app.post("/decryptpassword", (req, res)=> {
+    res.send(decrypt(req.body))
 });
 
 app.listen(PORT, ()=> {
