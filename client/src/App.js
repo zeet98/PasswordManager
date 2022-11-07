@@ -25,7 +25,15 @@ function App() {
     Axios.post("http://localhost:3001/decryptpassword", {
       password: encryption.password, iv: encryption.iv 
     }).then((response)=>{
-      console.log(response.data);
+      setPasswordList(passwordList.map((val)=> {
+        return val.id == encryption.id 
+        ? {
+          id: val.id, 
+          password: val.password, 
+          url: response.data, 
+          iv: val.iv}
+           : val;
+      }))
     });
   };
 
@@ -49,8 +57,10 @@ function App() {
     </div>
 
     <div className="Passwords">
-        {passwordList.map((val) => {
-          return (<div className="password"> 
+        {passwordList.map((val, key) => {
+          return (<div className="password" onClick={() => {decryptPassword(
+            {password: val.password, iv: val.iv, id: val.id})}}
+            key = {key}> 
                    <h3>{val.url}</h3>
                   </div>
           );
