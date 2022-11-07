@@ -22,10 +22,12 @@ function App() {
   };
 
   const decryptPassword = (encryption) => {
-    Axios.post("http://localhost:3001/", {
+    Axios.post("http://localhost:3001/decryptpassword", {
       password: encryption.password, iv: encryption.iv 
+    }).then((response)=>{
+      console.log(response.data);
     });
-  }
+  };
 
   return (<div className="App">
     <div className="AddingPassword">
