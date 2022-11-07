@@ -10,17 +10,24 @@ function App() {
   const [passwordList, setPasswordList] = useState([]);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/showpasswords/").then((response) => {
+    Axios.get("http://localhost:3001/showpasswords").then((response) => {
       setPasswordList(response.data);
     });
   }, []);
+
   const addPassword = () => {
     Axios.post("http://localhost:3001/addpassword", {
       password: password, url: url
     });
   };
 
-  return <div className="App">
+  const decryptPassword = (encryption) => {
+    Axios.post("http://localhost:3001/", {
+      password: encryption.password, iv: encryption.iv 
+    });
+  }
+
+  return (<div className="App">
     <div className="AddingPassword">
       <input 
         type="text"
@@ -42,13 +49,13 @@ function App() {
     <div className="Passwords">
         {passwordList.map((val) => {
           return (<div className="password"> 
-                   <h3>{val.title}</h3>
+                   <h3>{val.url}</h3>
                   </div>
           );
         })}
-
     </div>
-  </div>;
+  </div>
+  );
 }
 
 export default App;
